@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado.model';
 import { EmpleadosServiceService } from 'src/app/services/empleados-service.service';
 
@@ -45,5 +46,9 @@ export class EmpleadoComponent {
   addCaracteristica(newCaracteristica: string) {
     this.arrayCaracteristicas.push(newCaracteristica);
   }
+
+
+
+
 
 }

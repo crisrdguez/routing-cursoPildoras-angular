@@ -3,11 +3,13 @@
       <div class="col">
 
         <div *ngFor="let empleado of empleados; let i=index"> 
+          <a [routerLink]="['/modificar',i]">
             {{i+1}} {{empleado.nombre}} {{empleado.apellido}}. Cargo: {{empleado.cargo}}. 
-            Salario:<span [ngClass]="{salarioEstilo:empleado.salario>3000}">{{empleado.salario}}</span>   
+            Salario:<span [ngClass]="{salarioEstilo:empleado.salario>3000}">{{empleado.salario}}</span>  </a> 
+            <br><br>
         </div>
 
-        
+
         <app-caracteristicas-empleado (caracteristicasEmpleados)="addCaracteristica($event)"></app-caracteristicas-empleado>
         <ul style="list-style: none;">
             <li *ngFor="let item of arrayCaracteristicas">{{item}}</li>

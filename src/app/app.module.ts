@@ -12,6 +12,7 @@ import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PruebaComponent } from './components/prueba/prueba.component';
+import { ModificarEmpleadoComponent } from './modificar-empleado/modificar-empleado.component';
 
 const appRoutes:Routes = [
   {path:'', component:HomeComponent},
@@ -19,6 +20,7 @@ const appRoutes:Routes = [
   {path:'quienes', component:QuienesSomosComponent},
   {path:'contacto', component:ContactoComponent},
   {path:'prueba', component:PruebaComponent},
+  {path:'modificar/:id', component:ModificarEmpleadoComponent},
 ]
 
 @NgModule({
@@ -30,7 +32,8 @@ const appRoutes:Routes = [
     ProyectosComponent,
     QuienesSomosComponent,
     ContactoComponent,
-    PruebaComponent
+    PruebaComponent,
+    ModificarEmpleadoComponent
   ],
   imports: [
     BrowserModule,

@@ -20,4 +20,18 @@ export class EmpleadosServiceService {
     this.empleados.push(empleado);
   }
 
+  encontrarEmpleado(id:number){
+    let empleado:Empleado = this.empleados[id];
+    return empleado;
+  }
+
+  actualizaEmpleado(id:number, empleado:Empleado){
+    let empleadoModificado = this.empleados[id]; //almaceno en empleadoModificado, en la posicion id del array de empleados, el empleado que he modificado
+    //sobreescribimos
+    empleadoModificado.nombre=empleado.nombre;
+    empleadoModificado.apellido=empleado.apellido;
+    empleadoModificado.cargo=empleado.cargo;
+    empleadoModificado.salario=empleado.salario;
+  }
+
 }
