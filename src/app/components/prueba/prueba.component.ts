@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado.model';
 import { EmpleadosServiceService } from 'src/app/services/empleados-service.service';
 
 @Component({
-  selector: 'app-empleado',
-  templateUrl: './empleado.component.html',
-  styleUrls: ['./empleado.component.css']
+  selector: 'app-prueba',
+  templateUrl: './prueba.component.html',
+  styleUrls: ['./prueba.component.css']
 })
-export class EmpleadoComponent {
+export class PruebaComponent implements OnInit{
 
   nombre:string="";
   apellidos:string="";
@@ -16,7 +17,7 @@ export class EmpleadoComponent {
 
   empleados:Empleado[]=[];
 
-  constructor(private empleadosService:EmpleadosServiceService) { }
+  constructor(private router:Router, private empleadosService:EmpleadosServiceService) { }
 
   enviarInformacion(){
     const empleadoNuevo = new Empleado(this.nombre,this.apellidos,this.cargo,this.salario);
@@ -24,7 +25,8 @@ export class EmpleadoComponent {
     //llamo al metodo que agrega empleados dentro de mi servicio
     this.empleadosService.agregarEmpleadoServicio(empleadoNuevo);
     
-    //this.empleados.push(empleadoNuevo);
+    //Redirijo a quienes somos
+    this.router.navigate(['/quienes']);
 
     this.resetInfo();
   }
@@ -40,10 +42,5 @@ export class EmpleadoComponent {
     this.empleados=this.empleadosService.empleados;
   }
 
-  arrayCaracteristicas = [''];
-
-  addCaracteristica(newCaracteristica: string) {
-    this.arrayCaracteristicas.push(newCaracteristica);
-  }
 
 }
