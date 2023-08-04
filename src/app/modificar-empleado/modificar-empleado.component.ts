@@ -32,6 +32,16 @@ export class ModificarEmpleadoComponent implements OnInit{
     
   }
 
+  eliminarInformacion(){
+    //llamo al metodo que modifica empleados dentro de mi servicio
+    this.empleadosService.eliminarEmpleado(this.i);
+    
+    //Redirijo a quienes somos
+    this.router.navigate(['/quienes']);
+
+    
+  }
+
 
   ngOnInit():void{
     this.empleados=this.empleadosService.empleados;
