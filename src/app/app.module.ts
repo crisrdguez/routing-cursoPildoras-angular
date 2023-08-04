@@ -13,6 +13,7 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { ModificarEmpleadoComponent } from './modificar-empleado/modificar-empleado.component';
+import { ErrorPersonalizadoComponent } from './components/error-personalizado/error-personalizado.component';
 
 const appRoutes:Routes = [
   {path:'', component:HomeComponent},
@@ -21,6 +22,7 @@ const appRoutes:Routes = [
   {path:'contacto', component:ContactoComponent},
   {path:'prueba', component:PruebaComponent},
   {path:'modificar/:id', component:ModificarEmpleadoComponent},
+  {path:'**',component:ErrorPersonalizadoComponent}, //cualquier cosa diferente a lo que tenemos en la parte superior iria a esta ruta, este path siempre tiene que estar en ultimo lugar
 ]
 
 @NgModule({
@@ -33,7 +35,8 @@ const appRoutes:Routes = [
     QuienesSomosComponent,
     ContactoComponent,
     PruebaComponent,
-    ModificarEmpleadoComponent
+    ModificarEmpleadoComponent,
+    ErrorPersonalizadoComponent
   ],
   imports: [
     BrowserModule,

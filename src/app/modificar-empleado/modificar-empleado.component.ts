@@ -16,10 +16,34 @@ export class ModificarEmpleadoComponent implements OnInit{
   cargo:string="";
   salario:number=0;
 
+  //Para saber si llamamos a modificar o eliminar
+  accion:number=0;
+
   empleados:Empleado[]=[];
 
   constructor(private router:Router, private route:ActivatedRoute, private empleadosService:EmpleadosServiceService) { }
 
+  //Para usar QueryParams
+  actualizaEmpleado(){
+    if(this.accion==1){
+      const empleadoNuevo = new Empleado(this.nombre,this.apellidos,this.cargo,this.salario);
+
+    //llamo al metodo que modifica empleados dentro de mi servicio
+    this.empleadosService.actualizaEmpleado(this.i, empleadoNuevo);
+    
+    //Redirijo a quienes somos
+    this.router.navigate(['/quienes']);
+
+    }else{
+      //llamo al metodo que modifica empleados dentro de mi servicio
+      this.empleadosService.eliminarEmpleado(this.i);
+          
+      //Redirijo a quienes somos
+      this.router.navigate(['/quienes']);
+
+    }
+  }
+  /*
   modificarInformacion(){
     const empleadoNuevo = new Empleado(this.nombre,this.apellidos,this.cargo,this.salario);
 
@@ -41,9 +65,12 @@ export class ModificarEmpleadoComponent implements OnInit{
 
     
   }
-
+*/
 
   ngOnInit():void{
+
+    this.accion=parseInt(this.route.snapshot.queryParams['accion']);
+
     this.empleados=this.empleadosService.empleados;
 
     //Pasar parametros a rutas, rescatamos el id que viene en la url

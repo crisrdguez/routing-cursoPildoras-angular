@@ -3,9 +3,16 @@
       <div class="col">
 
         <div *ngFor="let empleado of empleados; let i=index"> 
-          <a [routerLink]="['/modificar',i]">
+         
             {{i+1}} {{empleado.nombre}} {{empleado.apellido}}. Cargo: {{empleado.cargo}}. 
-            Salario:<span [ngClass]="{salarioEstilo:empleado.salario>3000}">{{empleado.salario}}</span>  </a> 
+            Salario:<span [ngClass]="{salarioEstilo:empleado.salario>3000}">{{empleado.salario}}</span>  
+            <a [routerLink]="['/modificar',i]" [queryParams]="{accion:'1'}">
+              Actualiza
+            </a> 
+            &nbsp;
+            <a [routerLink]="['/modificar',i]" [queryParams]="{accion:'2'}">
+              Elimina
+            </a>
             <br><br>
         </div>
 
