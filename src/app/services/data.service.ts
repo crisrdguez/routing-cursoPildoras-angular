@@ -1,19 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Empleado } from '../models/empleado.model';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private loginservice:LoginService) { }
 
   //Primero tengo que conectar con la bbdd para traerme los empleados que hay alli guardados, en vez de hacerlo con empleados.service
   cargarEmpleados(){
 
-    //Devolvernos los registros almacenados
-    return this.http.get("https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos.json");
+    //usando autenticacion con firebase
+    //tenemos que decirle que cargue los empleados utilizando la autenticacion firmada en el token, por eso hemos inyectado en el constructor el loginservice
+    const token=this.loginservice.getIdToken();
+    return this.http.get("https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos.json?auth="+token);
+
+
+    //Devolvernos los registros almacenados en firebase, asi lo hacia antes de usar la autenticacion
+    //return this.http.get("https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos.json");
+
+    
+
 
   }
 
@@ -29,7 +39,8 @@ export class DataService {
 
     //Si en vez de utilizar el metodo post usamos el metodo put, lo que hace es reemplazar la informacion que ya puede existir en la bbdd
     //con post se generaba un nuevo registro con todos los datos, mas los que voy agregando
-    this.http.put("https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos.json",empleados).subscribe({//copio la url y añado al final datos.json y lo que quiero guardar, en este caso empleados*/
+    const token=this.loginservice.getIdToken();
+    this.http.put("https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos.json?auth="+token,empleados).subscribe({//copio la url y añado al final datos.json y lo que quiero guardar, en este caso empleados*/
       next(response){
         console.log("Se han guardado los empleados: " + response)
       },
@@ -43,8 +54,8 @@ export class DataService {
   }
 
   actualizarEmpleado(id:number, emple:Empleado){
-
-    let url = `https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos/${id}.json`;
+    const token=this.loginservice.getIdToken();
+    let url = `https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos/${id}.json?auth=${token}`;
 
     this.http.put(url, emple).subscribe({
       next(response){
@@ -61,8 +72,8 @@ export class DataService {
   }
 
   eliminaEmpleado(id:number){
-
-    let url = `https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos/${id}.json`;
+    const token=this.loginservice.getIdToken();
+    let url = `https://mis-clientes-ce40f-default-rtdb.europe-west1.firebasedatabase.app/datos/${id}.json?auth=${token}`;
 
     this.http.delete(url).subscribe({
       next(response){

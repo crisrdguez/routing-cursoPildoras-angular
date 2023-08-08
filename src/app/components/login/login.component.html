@@ -1,0 +1,24 @@
+
+<div class="d-flex justify-content-center vh-100">
+    <div class="col-6">
+        <h1>Login</h1>
+        <form #miFormulario="ngForm" (ngSubmit)="login(miFormulario)">
+
+            <div class="mb-3 form-group">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" ngModel>
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+
+            <div class="mb-2 form-group">
+              <label for="passw" class="form-label">Password</label>
+              <input type="password" class="form-control" id="passw" name="password" ngModel>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+
+
+

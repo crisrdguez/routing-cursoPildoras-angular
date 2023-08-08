@@ -17,6 +17,10 @@ import { ErrorPersonalizadoComponent } from './components/error-personalizado/er
 import { EmpleadosServiceService } from './services/empleados-service.service';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
+import { LoginService } from './services/login.service';
+import { CookieService } from 'ngx-cookie-service';
+
 
 const appRoutes:Routes = [
   {path:'', component:HomeComponent},
@@ -25,6 +29,7 @@ const appRoutes:Routes = [
   {path:'contacto', component:ContactoComponent},
   {path:'prueba', component:PruebaComponent},
   {path:'modificar/:id', component:ModificarEmpleadoComponent},
+  {path:'login', component:LoginComponent},
   {path:'**',component:ErrorPersonalizadoComponent}, //cualquier cosa diferente a lo que tenemos en la parte superior iria a esta ruta, este path siempre tiene que estar en ultimo lugar
 ]
 
@@ -39,16 +44,17 @@ const appRoutes:Routes = [
     ContactoComponent,
     PruebaComponent,
     ModificarEmpleadoComponent,
-    ErrorPersonalizadoComponent
+    ErrorPersonalizadoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [EmpleadosServiceService,DataService],
+  providers: [EmpleadosServiceService,DataService,LoginService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
