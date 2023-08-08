@@ -14,6 +14,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { ModificarEmpleadoComponent } from './modificar-empleado/modificar-empleado.component';
 import { ErrorPersonalizadoComponent } from './components/error-personalizado/error-personalizado.component';
+import { EmpleadosServiceService } from './services/empleados-service.service';
+import { DataService } from './services/data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes:Routes = [
   {path:'', component:HomeComponent},
@@ -42,9 +45,10 @@ const appRoutes:Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [EmpleadosServiceService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
