@@ -20,14 +20,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { LoginService } from './services/login.service';
 import { CookieService } from 'ngx-cookie-service';
+import { loginGuard } from './components/login/login-guardian';
 
 
 const appRoutes:Routes = [
   {path:'', component:HomeComponent},
-  {path:'proyectos', component:ProyectosComponent},
+  {path:'proyectos', component:ProyectosComponent,canActivate:[loginGuard]},
   {path:'quienes', component:QuienesSomosComponent},
-  {path:'contacto', component:ContactoComponent},
-  {path:'prueba', component:PruebaComponent},
+  {path:'contacto', component:ContactoComponent, canActivate:[loginGuard]},
+  {path:'prueba', component:PruebaComponent,canActivate:[loginGuard]},
   {path:'modificar/:id', component:ModificarEmpleadoComponent},
   {path:'login', component:LoginComponent},
   {path:'**',component:ErrorPersonalizadoComponent}, //cualquier cosa diferente a lo que tenemos en la parte superior iria a esta ruta, este path siempre tiene que estar en ultimo lugar
