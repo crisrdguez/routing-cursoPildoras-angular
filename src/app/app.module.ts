@@ -24,13 +24,13 @@ import { loginGuard } from './components/login/login-guardian';
 
 
 const appRoutes:Routes = [
-  {path:'', component:HomeComponent},
+  {path:'', component:HomeComponent,canActivate:[loginGuard]},
+  {path:'login', component:LoginComponent},
   {path:'proyectos', component:ProyectosComponent,canActivate:[loginGuard]},
-  {path:'quienes', component:QuienesSomosComponent},
+  {path:'quienes', component:QuienesSomosComponent,canActivate:[loginGuard]},
   {path:'contacto', component:ContactoComponent, canActivate:[loginGuard]},
   {path:'prueba', component:PruebaComponent,canActivate:[loginGuard]},
   {path:'modificar/:id', component:ModificarEmpleadoComponent},
-  {path:'login', component:LoginComponent},
   {path:'**',component:ErrorPersonalizadoComponent}, //cualquier cosa diferente a lo que tenemos en la parte superior iria a esta ruta, este path siempre tiene que estar en ultimo lugar
 ]
 

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit{
       
   }
 
-  login(form:NgForm){
+  loginF(form:NgForm){
 
     const email=form.value.email; //el valor que le he puesto al name en el form
 
